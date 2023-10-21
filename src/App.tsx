@@ -1,55 +1,41 @@
-import Button from './components/ButtonHero';
-import logo from './assets/logo.png';
-import './styles/App.css';
-import { login } from './lib/api/user';
-import { Owner } from './lib/api/owner';
-import { useState } from 'react';
-import { Refugee } from './lib/api/refugee';
+import "./styles/App.css";
+import { login } from "./lib/api/user";
+import { Owner } from "./lib/api/owner";
+import { useState } from "react";
+import { Refugee } from "./lib/api/refugee";
+import OwnerPage from "./components/OwnerPage";
+import LandingPage from "./components/LandingPage";
 
 function App() {
-  const [owner, setOwner] = useState<Owner | null>(null);
-  const [refugee, setRefugee] = useState<Refugee | null>(null);
+	const [owner, setOwner] = useState<Owner | null>(null);
+	const [refugee, setRefugee] = useState<Refugee | null>(null);
 
-  const [showLandingPage, setShowLandingPage] = useState(true);
-  const [showCreateAccount, setShowCreateAccount] = useState(false);
+	const [showLandingPage, setShowLandingPage] = useState(true);
+	const [showCreateAccount, setShowCreateAccount] = useState(false);
 
-  const logInFlow = async () => {
-    const loginResult = await login();
+	const logInFlow = async () => {
+		const loginResult = await login();
 
-    setShowLandingPage(false);
+		setShowLandingPage(false);
 
-    if (loginResult === null) {
-      setShowCreateAccount(true);
-    }
-    else if (loginResult?.userType === "owner") {
-      setOwner(loginResult.user);
-    } else {
-      setRefugee(loginResult.user);
-    }
-  }
+		if (loginResult === null) {
+			setShowCreateAccount(true);
+		} else if (loginResult?.userType === "owner") {
+			setOwner(loginResult.user);
+		} else {
+			setRefugee(loginResult.user);
+		}
+	};
 
-  return (
-    <>
-      {showCreateAccount && <p style={{ color: "black" }}>Create Account</p>}
+	return (
+		<>
+			{showLandingPage && <LandingPage logInFlow={logInFlow} />}
 
-      {showLandingPage && <>
-        <div>
-          <a href="" target="_blank">
-            <img src={logo} width={60} height={100} className="logo" alt="Hostas logo" />
-          </a>
-        </div>
-        <h1>Hosta</h1>
-        <div className="card">
-          <Button onClick={logInFlow} />
-        </div>
-        <p className="slogan">
-          Helping refugees turn over a new leaf
-        </p>
-      </>}
+			{owner && <OwnerPage owner={owner} />}
 
-      {owner && <p>Owner: {owner.name}</p>}
-    </>
-  )
+			{showCreateAccount && <p>Create Account</p>}
+		</>
+	);
 }
 
-export default App
+export default App;
