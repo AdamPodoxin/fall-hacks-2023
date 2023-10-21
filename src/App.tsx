@@ -6,10 +6,8 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="" target="_blank">
-          <img src={logo} width={60} height={100} className="logo" alt="Hostas logo" />
-        </a>
+      <div className="leaf-logo">
+        <img src={logo} width={70} height={100} className="logo" alt="Hostas logo" />
       </div>
       <h1>Hosta</h1>
       <div className="card">
