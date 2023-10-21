@@ -1,4 +1,4 @@
-import Button  from './components/ButtonHero'
+import Button from './components/ButtonHero'
 import logo from './assets/logo.png'
 import './styles/App.css'
 
@@ -8,7 +8,7 @@ function App() {
     <>
       <div>
         <a href="" target="_blank">
-          <img src={logo} width={200} height={200} className="logo" alt="Hostas logo" />
+          <img src={logo} width={60} height={100} className="logo" alt="Hostas logo" />
         </a>
       </div>
       <h1>Hosta</h1>
