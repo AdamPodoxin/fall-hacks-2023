@@ -2,6 +2,8 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,3 +17,17 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+export const db = getFirestore(app);
+
+const auth = getAuth(app);
+const googleAuthProvider = new GoogleAuthProvider();
+
+export const logIn = async () => {
+	const {user} = await signInWithPopup(auth, googleAuthProvider);
+	return user;
+}
+
+export const logOut = () => signOut(auth);
+
+export const getCurrentUser = () => auth.currentUser;
