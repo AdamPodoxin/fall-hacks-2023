@@ -1,6 +1,6 @@
-import Button from './components/ButtonHero'
-import logo from './assets/logo.png'
-import './styles/App.css'
+import Button from './components/ButtonHero';
+import logo from './assets/logo.png';
+import './styles/App.css';
 import { login } from './lib/api/user';
 import { Owner } from './lib/api/owner';
 import { useState } from 'react';
@@ -10,26 +10,29 @@ function App() {
   const [owner, setOwner] = useState<Owner | null>(null);
   const [refugee, setRefugee] = useState<Refugee | null>(null);
 
-  const [showSignIn, setShowSignIn] = useState(false);
+  const [showLandingPage, setShowLandingPage] = useState(true);
+  const [showCreateAccount, setShowCreateAccount] = useState(false);
 
   const logInFlow = async () => {
     const loginResult = await login();
 
+    setShowLandingPage(false);
+
     if (loginResult === null) {
-      setShowSignIn(true);
+      setShowCreateAccount(true);
     }
     else if (loginResult?.userType === "owner") {
       setOwner(loginResult.user);
     } else {
-      setRefugee(loginResult.user)
+      setRefugee(loginResult.user);
     }
   }
 
   return (
     <>
-      {showSignIn && <p style={{ color: "black" }}>Sign In</p>}
+      {showCreateAccount && <p style={{ color: "black" }}>Create Account</p>}
 
-      {!showSignIn && <>
+      {showLandingPage && <>
         <div>
           <a href="" target="_blank">
             <img src={logo} width={60} height={100} className="logo" alt="Hostas logo" />
@@ -44,6 +47,7 @@ function App() {
         </p>
       </>}
 
+      {owner && <p>Owner: {owner.name}</p>}
     </>
   )
 }
