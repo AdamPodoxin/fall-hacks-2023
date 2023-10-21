@@ -1,0 +1,17 @@
+.navbar {
+  position: absolute;
+  top: 0;
+  width: 100svw;
+}
+
+.nav-logo {
+  margin-left: 50px;
+}
+
+.nav-right {
+  margin-right: 50px;
+}
+
+.nav-items {
+  padding: 10px;
+}
