@@ -39,19 +39,26 @@ const bookingConverter = {
 	},
 };
 
+export const getBookingsForHouse = async (houseId: string) => {
+	const bookingsRef = collection(db, "bookings").withConverter(
+		bookingConverter
+	);
+
+	const houseIdQuery = query(bookingsRef, where("houseId", "==", houseId));
+
+	const bookingsForHouse = (await getDocs(houseIdQuery)).docs.map((doc) =>
+		doc.data()
+	);
+
+	return bookingsForHouse;
+};
+
 export const createBooking = async (booking: Omit<Booking, "id">) => {
 	const bookingsRef = collection(db, "bookings").withConverter(
 		bookingConverter
 	);
 
-	const houseIdQuery = query(
-		bookingsRef,
-		where("houseId", "==", booking.houseId)
-	);
-
-	const bookingsForHouse = (await getDocs(houseIdQuery)).docs.map((doc) =>
-		doc.data()
-	);
+	const bookingsForHouse = await getBookingsForHouse(booking.houseId);
 
 	bookingsForHouse.forEach((existingBooking) => {
 		const isDateInExistingBooking = (date: Date) => {
