@@ -1,19 +1,18 @@
+import React, { ReactNode } from 'react';
 import '../styles/buttonHero.css'
 
 interface Props {
-    icon?: React.ReactNode;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
+    children: ReactNode;
   }
   
   export default function Button({
     onClick,
-  }: React.PropsWithChildren<Props>) {
+    children,
+  }: Props) {
     return (
-      <button
-        onClick={onClick}
-        className="signIn"
-      >
-        {"Sign In"}
+      <button onClick={onClick}>
+        {children}
       </button>
     );
   }

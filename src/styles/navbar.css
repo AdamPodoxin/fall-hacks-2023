@@ -2,10 +2,20 @@
   position: absolute;
   top: 0;
   width: 100svw;
+  background-color: #dbdfdf;
+}
+
+.bg-light {
+  --cui-bg-opacity: 0;
+}
+
+.container-fluid {
+  background-color: #dbdfdf;
 }
 
 .nav-logo {
   margin-left: 50px;
+  margin-bottom: 15px;
 }
 
 .nav-right {
@@ -14,4 +24,5 @@
 
 .nav-items {
   padding: 10px;
+  margin-bottom: 10px;
 }

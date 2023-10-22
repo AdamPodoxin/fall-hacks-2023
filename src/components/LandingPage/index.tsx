@@ -1,5 +1,6 @@
 import logo from "../../assets/logo.png";
 import Button from "../ButtonHero";
+import '../../styles/landing.css'
 
 type LandingPageProps = {
 	logInFlow: () => void;
@@ -21,9 +22,9 @@ const LandingPage = ({ logInFlow }: LandingPageProps) => {
 			</div>
 			<h1>Hosta</h1>
 			<div className="card">
-				<Button onClick={logInFlow} />
+				<Button children={"Sign In"}onClick={logInFlow} />
 			</div>
-			<p className="slogan">Helping refugees turn over a new leaf</p>
+			<p className="slogan">Helping refugees turn over a new page</p>
 		</>
 	);
 };

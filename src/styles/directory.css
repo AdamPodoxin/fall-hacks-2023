@@ -1,0 +1,9 @@
+.options {
+	margin: auto;
+    width: 100svw;
+    justify-content: center;
+	text-align: center;
+    display: flex;
+    position: absolute;
+    gap: 40px;
+}
