@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Refugee } from "./lib/api/refugee";
 import OwnerPage from "./components/OwnerPage";
 import LandingPage from "./components/LandingPage";
+import RefugeePage from "./components/RefugeePage";
 
 function App() {
 	const [owner, setOwner] = useState<Owner | null>(null);
@@ -32,6 +33,8 @@ function App() {
 			{showLandingPage && <LandingPage logInFlow={logInFlow} />}
 
 			{owner && <OwnerPage owner={owner} />}
+
+			{refugee && <RefugeePage refugee={refugee} />}
 
 			{showCreateAccount && <p>Create Account</p>}
 		</>
