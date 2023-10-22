@@ -6,6 +6,8 @@ import {
 	where,
 	addDoc,
 	Timestamp,
+	deleteDoc,
+	doc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 
@@ -14,6 +16,7 @@ export type Booking = {
 	endDate: Date;
 	houseId: string;
 	refugeeUid: string;
+	id: string;
 };
 
 const bookingConverter = {
@@ -31,11 +34,12 @@ const bookingConverter = {
 			endDate: (data["endDate"] as Timestamp).toDate(),
 			houseId: data["houseId"],
 			refugeeUid: data["refugeeUid"],
+			id: snapshot.id,
 		} as Booking;
 	},
 };
 
-export const createBooking = async (booking: Booking) => {
+export const createBooking = async (booking: Omit<Booking, "id">) => {
 	const bookingsRef = collection(db, "bookings").withConverter(
 		bookingConverter
 	);
@@ -69,4 +73,19 @@ export const createBooking = async (booking: Booking) => {
 	});
 
 	await addDoc(bookingsRef, booking);
+};
+
+export const getBookingsForRefugee = async (refugeeUid: string) => {
+	const bookingsRef = collection(db, "bookings").withConverter(
+		bookingConverter
+	);
+	const q = query(bookingsRef, where("refugeeUid", "==", refugeeUid));
+
+	const querySnapshot = await getDocs(q);
+
+	return querySnapshot.docs.map((doc) => doc.data());
+};
+
+export const cancelBooking = async (id: string) => {
+	await deleteDoc(doc(db, "bookings", id));
 };
