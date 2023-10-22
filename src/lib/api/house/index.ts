@@ -8,7 +8,6 @@ import {
 	where,
 } from "firebase/firestore";
 import { db } from "../../firebase";
-import { time } from "console";
 
 export type House = {
 	id: string;
