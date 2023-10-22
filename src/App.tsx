@@ -6,6 +6,7 @@ import { Refugee } from "./lib/api/refugee";
 import OwnerPage from "./components/OwnerPage";
 import LandingPage from "./components/LandingPage";
 import RefugeePage from "./components/RefugeePage";
+import Directory from "./directory";
 
 function App() {
 	const [owner, setOwner] = useState<Owner | null>(null);
@@ -36,7 +37,12 @@ function App() {
 
 			{refugee && <RefugeePage refugee={refugee} />}
 
-			{showCreateAccount && <p>Create Account</p>}
+			{showCreateAccount && (
+				<Directory
+					setRefugee={setRefugee}
+					setShowCreateAccount={setShowCreateAccount}
+				/>
+			)}
 		</>
 	);
 }

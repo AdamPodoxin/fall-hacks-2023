@@ -1,12 +1,13 @@
 import {
 	GeoPoint,
 	QueryDocumentSnapshot,
+	addDoc,
 	collection,
 	getDocs,
 	query,
 	where,
 } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db, getCurrentUser } from "../../firebase";
 
 export type Refugee = {
 	name: string;
@@ -33,4 +34,22 @@ export const getRefugeeByUid = async (uid: string) => {
 	} else {
 		return querySnapshot.docs[0].data();
 	}
+};
+
+export const registerNewRefugee = async () => {
+	const refugeesRef = collection(db, "refugees").withConverter(
+		refugeeConverter
+	);
+
+	const currentUser = getCurrentUser();
+
+	const newRefugee: Refugee = {
+		name: currentUser!.displayName!,
+		uid: currentUser!.uid,
+		location: new GeoPoint(0, 0),
+	};
+
+	await addDoc(refugeesRef, newRefugee);
+
+	return newRefugee;
 };
