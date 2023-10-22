@@ -1,11 +1,12 @@
 import {
 	QueryDocumentSnapshot,
+	addDoc,
 	collection,
 	getDocs,
 	query,
 	where,
 } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db, getCurrentUser } from "../../firebase";
 
 export type Owner = {
 	name: string;
@@ -28,4 +29,19 @@ export const getOwnerByUid = async (uid: string) => {
 	} else {
 		return querySnapshot.docs[0].data();
 	}
+};
+
+export const registerNewOwner = async () => {
+	const ownersRef = collection(db, "owners").withConverter(ownerConverter);
+
+	const currentUser = getCurrentUser();
+
+	const newOwner: Owner = {
+		name: currentUser!.displayName!,
+		uid: currentUser!.uid,
+	};
+
+	await addDoc(ownersRef, newOwner);
+
+	return newOwner;
 };

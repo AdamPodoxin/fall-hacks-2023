@@ -40,6 +40,7 @@ function App() {
 			{showCreateAccount && (
 				<Directory
 					setRefugee={setRefugee}
+					setOwner={setOwner}
 					setShowCreateAccount={setShowCreateAccount}
 				/>
 			)}
