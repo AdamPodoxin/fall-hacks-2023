@@ -7,6 +7,6 @@ function Homepage() {
         <Navbar />
       </>
     )
-  }
+}
   
 export default Homepage
