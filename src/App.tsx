@@ -1,4 +1,3 @@
-import "./styles/App.css";
 import { login } from "./lib/api/user";
 import { Owner } from "./lib/api/owner";
 import { useState } from "react";

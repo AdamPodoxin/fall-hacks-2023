@@ -1,7 +1,6 @@
 import Navbar from "./components/Navbar";
 import Button from "./components/ButtonHero";
 import { HomeIcon, PersonIcon } from "@radix-ui/react-icons";
-import "./styles/App.css";
 import "./styles/directory.css";
 import { Refugee, registerNewRefugee } from "./lib/api/refugee";
 import { useState } from "react";
