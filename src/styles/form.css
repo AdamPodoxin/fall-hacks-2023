@@ -1,0 +1,9 @@
+input[type="text"], textarea {
+    border-radius: 7px;
+    background-color: rgb(238, 239, 241);
+    color: #000000
+  }
+
+input {
+    width: 50svw;
+}
