@@ -1,9 +1,9 @@
+import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Button from "./components/ButtonHero";
 import { HomeIcon, PersonIcon } from "@radix-ui/react-icons";
 import "./styles/directory.css";
 import { Refugee, registerNewRefugee } from "./lib/api/refugee";
-import { useState } from "react";
 import FormPage from "./formPage";
 import { Owner } from "./lib/api/owner";
 
@@ -32,9 +32,10 @@ function Directory({
 			{!showOwner && (
 				<>
 					<Navbar />
-					<div className="main-text-wrapper">
+					{/* <div className="main-text-wrapper">
 						<h1 className="main-text">Please select your user type</h1>
-					</div>
+					</div> */}
+					<h1>Please select your user type</h1>
 					<div className="options">
 						<div className="button-indi">
 							<Button
